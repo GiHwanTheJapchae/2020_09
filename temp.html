@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>temp</title>
+
+    
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+
+</head>
+<!--needed text/background color-->
+<style>
+    @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+    a {
+        text-decoration: none;
+        color:inherit
+    }
+
+    body{
+        font-family: "Nanum Gothic", sans-serif;
+        background-color:#d9e1e8;
+        font-weight: 800;
+    }
+    div{
+        border-radius: 10px / 10px;
+    }
+    .bg_wht{
+        background-color:white;
+    }
+    .bg_blue{
+        background-color: #2b90d9;
+    }
+    .bg_ltgray{
+        background-color: #d9e1e8;
+    }
+    .bg_nmgray{
+        background-color: #9baec8;
+    }
+    .bg_blk{
+        background-color:#282c37;
+    }
+    .txt_ltgray{
+        color:#d9e1e8;
+    }
+    .txt_nmgray{
+        color: #9baec8;
+    }
+    .txt_blk{
+        color:#282c37;
+    }
+    .txt_blue{
+        color:#2b90d9;
+
+    }
+
+</style>
+<body onload="initialize()">
+    <nav class="navbar sticky-top bg-white flex-md-nowrap p-2 shadow txt_blk">
+        <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3 " href="#">Company name</a>
+        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse"
+            data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+            <ul class="navbar-nav px-3">
+                <li class="nav-item text-nowrap">
+                    <a class="nav-link" href="#">Sign out</a>
+                </li>
+            </ul>
+    </nav>
+    
+        <div class="container-fluid">
+            <div class="row">
+                <nav id="sidebarMenu" class="bg_blue col-md-3 col-lg-2 d-md-block sidebar collapse txt_ltgray">
+                    <div class="sidebar-sticky pt-3">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">
+                                    <span>
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-grid" fill="currentColor"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+                                        </svg>
+                                    </span>
+                                    <span data-feather="home"></span>
+                                    Dashboard <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span data-feather="file"></span>
+                                    Orders
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span data-feather="shopping-cart"></span>
+                                    Products
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span data-feather="users"></span>
+                                    Customers
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span data-feather="bar-chart-2"></span>
+                                    Reports
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span data-feather="layers"></span>
+                                    Integrations
+                                </a>
+                            </li>
+                        </ul>
+        
+                        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                            <span>Saved reports</span>
+                            <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+                                <span data-feather="plus-circle"></span>
+                            </a>
+                        </h6>
+                        <ul class="nav flex-column mb-2">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span data-feather="file-text"></span>
+                                    Current month
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span data-feather="file-text"></span>
+                                    Last quarter
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span data-feather="file-text"></span>
+                                    Social engagement
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span data-feather="file-text"></span>
+                                    Year-end sale
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <div class="col-8">
+                    <h1>
+                        Drone Dashboard
+                    </h1>
+                    
+                </div>
+
+
+
+                <div class="container bg_wht m-3 col-4 card shadow">
+                    <div class="row ">
+                        <h3 class="p-3 col-12  card-header">Drone Location</h3>
+
+                        <div id="map"  style="width:680px; height:450px;"></div>
+                        <script async defer
+                            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2EjZZVVDEKSRkEmGRaSJ_Mqq7cTCgwOE&callback=initMap&region=kr"></script>
+                        <script src="./map_scr.js"></script>
+
+                        <div class="row p-3">
+                            <button type="button" class="btn btn-outline-secondary m-2"> Refresh </button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="container m-3 col-4">
+                    <div class="row mb-2">
+                        <div class="col-3 mr-2 bg_wht">
+                            <div>
+                                usr num
+                            </div>
+                            <h1>
+                                3
+                            </h1>
+                            <div>current user</div>
+                        </div>
+                        <div class="col-3 mr-2 bg_wht">
+                            <div>
+                                loc num
+                            </div>
+                            <h1>
+                                3
+                            </h1>
+                            <div>heading loc</div>
+                        </div>                    
+                    </div>
+                    <div class="row">
+                        <div class="col-6 bg_wht">
+                            abc
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+
+</body>
+<!--AIzaSyA2EjZZVVDEKSRkEmGRaSJ_Mqq7cTCgwOE-->
+</html>

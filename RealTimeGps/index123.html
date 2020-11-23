@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+    <head>
+      <meta charset="utf-8">
+      <title>Firebase realtime gps</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css"/>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA226KY9zLFQdnzX0Ku_oKRZLqAQLhpijg&libraries=visualization"></script>
+      <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+	   <script src="javascripts/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
+       <link href="stylesheets/style.css" rel="stylesheet" />
+    <script>
+        var config = {
+		  apiKey: "AIzaSyDr3g2PwSVByaQD_BSH2QbCQjsgwmPhfA8",
+          authDomain: "ditappsprj.firebaseapp.com",
+          databaseURL: "https://ditappsprj.firebaseio.com",
+          projectId: "ditappsprj",
+          storageBucket: "ditappsprj.appspot.com",
+          messagingSenderId: "780458957541"
+        };
+        firebase.initializeApp(config);
+		 document.getElementById("pm2").innerHTML = "20";
+         document.getElementById("pm10").innerHTML = "50";
+    </script>
+  </head>
+  <body>
+    <table>
+      <tr>
+          <td>lat</td>
+          <td><input type="text" name="lat" id="lat" /></td>
+          <td>lng</td>
+          <td><input type="text" name="lng" id="lng" /></td>
+          <td>humi</td>
+          <td><input type="text" name="humidity" id="humidity" /></td>
+          <td>temp</td>
+          <td><input type="text" name="temperature" id="temperature" /></td>
+          <td>time</td>
+          <td><input type="text" name="time" id="time" /></td>
+      </tr>
+    </table>
+
+    <script>
+      var dbRef = firebase.database().ref('logDHT');
+      dbRef.once('value', function(snapshot) {
+        var lastData = 0;
+        snapshot.forEach(function(childSnapshot) {
+          lastData = childSnapshot;
+        });
+        setValue(lastData);
+      });
+      dbRef.on("child_added", function(snapshot) {
+        setValue(snapshot);
+      });
+      dbRef.on("child_changed", function(snapshot) {
+        setValue(snapshot);
+      });
+      var key = ""
+      
+      function setValue(snapshot)
+      {
+        document.getElementById('lat').value = snapshot.val().lat;
+        document.getElementById('lng').value = snapshot.val().lng;
+		document.getElementById('humidity').value = snapshot.val().humidity;
+        document.getElementById('temperature').value = snapshot.val().temperature;
+        document.getElementById('time').value = snapshot.val().time;
+		document.getElementById('state1').innerHTML = snapshot.val().temperature;
+		document.getElementById('state2').innerHTML = snapshot.val().humidity;
+	  };
+    </script>
+
+  <table class ="centertable" >
+    <tr>
+	    <td rowspan ="2">
+		    <div id="map" style="width:1100px; height: 700px; "></div>
+		</td>
+        <td>
+            <div class="ttitle">Temperature</div>
+            <div id="g5"></div>
+            <p id="state1">--</p>
+        </td>
+    </tr>
+	<tr>
+        <td>
+            <div class="ttitle">humidity</div>
+            <div id="g6"></div>
+            <p id="state2">--</p>
+        </td>
+    </tr>
+   </table>
+
+    <script>
+	   var map, heatmap;
+	   function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat:35.166777, lng:129.074908},
+      zoom: 16,
+      styles: [{
+        featureType: 'poi',
+        stylers: [{ visibility: 'off' }]  // Turn off points of interest.
+      }, {
+        featureType: 'transit.station',
+        stylers: [{ visibility: 'off' }]  // Turn off bus stations, train stations, etc.
+      }],
+      disableDoubleClickZoom: true
+    });
+
+	var heatmap = new google.maps.visualization.HeatmapLayer({
+    data: [],
+    map: map,
+    radius: 30
+    });
+	dbRef.on("child_added",
+	  function(snapshot) {
+        var newPosition = snapshot.val();
+        var point = new google.maps.LatLng(snapshot.val().lat, snapshot.val().lng);
+        heatmap.getData().push(point);
+      });
+   }
+   google.maps.event.addDomListener(window, 'load', initMap);
+    </script>
+
+    <script src="raphael-2.1.4.min.js"></script>
+    <script src="justgage.js"></script>
+    <script>
+    var g5;
+    document.addEventListener("DOMContentLoaded", function(event) {
+        g5 = new JustGage({
+            id: "g5",
+            value: 72,
+            min: 0,
+            max: 100,
+            donut: true,
+            gaugeWidthScale: 0.3,
+            counter: true,
+            hideInnerShadow: true
+        });
+   setInterval(myMethod, 1000);
+   function myMethod()
+	{
+		var aa = document.getElementById("temperature").value;
+		g5.refresh(parseInt(aa));
+	}
+    });
+    </script>
+    <script src="raphael-2.1.4.min.js"></script>
+    <script src="justgage.js"></script>
+    <script>
+	var g6;
+    document.addEventListener("DOMContentLoaded", function(event) {
+        g6 = new JustGage({
+            id: "g6",
+            value: 72,
+            min: 0,
+            max: 100,
+            donut: true,
+            gaugeWidthScale: 0.3,
+            counter: true,
+            hideInnerShadow: true
+        });
+   setInterval(myMethod, 1000);
+   function myMethod()
+	{
+		var aa = document.getElementById("humidity").value;
+		g6.refresh(parseInt(aa));
+	}
+    });
+    </script>
+<!------------------------------------------------------------------------>
+  </body>
+</html>
